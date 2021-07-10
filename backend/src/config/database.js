@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-module.exports = mongoose.connect('mongodb://localhost/mymoney', { useNewUrlParser: true })
-
+module.exports = mongoose.connect('mongodb://localhost/mymoney', { useMongoClient: true });
 
 mongoose.Error.messages.general.required = "The attr '{PATH}' is required."
 mongoose.Error.messages.Number.min = 
