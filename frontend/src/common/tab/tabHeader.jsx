@@ -15,4 +15,4 @@ class TabsHeader extends Component {
     }
 }
 
-export default TabsHeader;
+export default TabsHeader
