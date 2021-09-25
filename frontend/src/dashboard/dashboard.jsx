@@ -15,15 +15,15 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { credits, debts } = this.props.summary
+        const { credit, debt } = this.props.summary
         return (
             <div>
                 <ContentHeader title='Dashboard' small='Versão 1.0' />
                 <Content>
                     <Row>
-                        <ValueBox cols='12 4' color='green' icon='bank' value={`R$ ${credits}`} text='Total Credits'></ValueBox>
-                        <ValueBox cols='12 4' color='red' icon='credit-card' value={`R$ ${debts}`} text='Total Debits'></ValueBox>
-                        <ValueBox cols='12 4' color='blue' icon='money' value={`R$ ${credits - debts}`} text='Curretl Balance'></ValueBox>
+                        <ValueBox cols='12 4' color='green' icon='bank' value={`R$ ${credit}`} text='Total Credit'></ValueBox>
+                        <ValueBox cols='12 4' color='red' icon='credit-card' value={`R$ ${debt}`} text='Total Debits'></ValueBox>
+                        <ValueBox cols='12 4' color='blue' icon='money' value={`R$ ${credit - debt}`} text='Curretl Balance'></ValueBox>
                     </Row>
                 </Content>
             </div>
