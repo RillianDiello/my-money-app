@@ -7,27 +7,22 @@ import labelAndInput from '../common/form/labelAndInput'
 import { init } from './billingCycleAction';
 
 class BillingCycleForm extends Component {
-    handleChangeMonth(e) {
-        console.log('caiu aki');
-        // if (e.target.value.match("^[0-9]*$") != null) {
-        //     this.setState({ Value: e.target.value });
-        // }
-    }
+
     render() {
-        const { handleSubmit } = this.props
+        const { handleSubmit, readOnly } = this.props
 
         return (
             <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
-                    <Field name='name' component={labelAndInput}
+                    <Field name='name' component={labelAndInput} readOnly={readOnly}
                         label='Name' cols='12 4' placeholder='Enter a name' />
-                    <Field name='month' component={labelAndInput}
+                    <Field name='month' component={labelAndInput} readOnly={readOnly}
                         label='Month' cols='12 4' placeholder='Enter a month' type='number' />
-                    <Field name='year' component={labelAndInput}
+                    <Field name='year' component={labelAndInput} readOnly={readOnly}
                         label='Year' cols='12 4' placeholder='Enter a year' type='number' />
                 </div>
                 <div className='box-footer'>
-                    <button type='submit' className='btn btn-primary'>Submit</button>
+                    <button type='submit' className={`btn btn-${this.props.submitClass}`}>{this.props.submitLabel}</button>
                     <button type='button' className='btn btn-default'
                         onClick={this.props.init}
                     >Cancel</button>
@@ -39,5 +34,5 @@ class BillingCycleForm extends Component {
 
 
 BillingCycleForm = reduxForm({ form: 'billingCycleForm', destroyOnUnmount: false })(BillingCycleForm)
-const mapDispatchToProps = dispatch => bindActionCreators({init}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch)
 export default connect(null, mapDispatchToProps)(BillingCycleForm)
