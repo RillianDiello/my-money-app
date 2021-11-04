@@ -10,7 +10,6 @@ class BillingCycleList extends Component {
 
     componentWillMount() {
         this.props.getList()
-        console.log(this.props.list)
     }
     renderRows() {
         const list = this.props.list || []
