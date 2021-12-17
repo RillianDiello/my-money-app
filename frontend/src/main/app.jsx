@@ -10,8 +10,8 @@ export default props => (
     <div className='wrapper'>
         <Header />
         <SideBar />
-        <div className='content-wrapper'>
-            <Routes />
+        <div className='content-wrapper'> 
+            {props.children}
         </div>
         <Footer />
         <Messages />

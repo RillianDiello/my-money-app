@@ -5,13 +5,14 @@ import consts from '../const.s'
 export function login(values) {
     return submit(values, `${consts.OAPI_URL}/login`)
 }
+
 export function signup(values) {
     return submit(values, `${consts.OAPI_URL}/signup`)
 }
 
 function submit(values, url) {
     return dispatch => {
-        axios.post(url, value)
+        axios.post(url, values)
             .then(resp => {
                 dispatch([
                     { type: 'USER_FETCHED', payload: resp.data }
@@ -19,11 +20,9 @@ function submit(values, url) {
             })
             .catch(e => {
                 e.response.data.errors.forEach(
-                    error => toastr.error('Erro', error)
-                )
+                    error => toastr.error('Erro', error))
             })
     }
-
 }
 
 export function logout() {

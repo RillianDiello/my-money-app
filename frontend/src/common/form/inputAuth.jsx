@@ -10,7 +10,7 @@ export default props => (
                 readOnly={props.readOnly}
                 type={props.type} />
             <span className={`glyphicon glyphicon-${props.icon}
-    form-control-feedback`}></span>
+                form-control-feedback`}></span>
         </div>
     </If>
 )

@@ -15,6 +15,7 @@ class AuthOrApp extends Component {
             this.props.validateToken(this.props.auth.user.token)
         }
     }
+
     render() {
         const { user, validToken } = this.props.auth
         if (user && validToken) {
@@ -29,6 +30,5 @@ class AuthOrApp extends Component {
 }
 
 const mapStateToProps = state => ({ auth: state.auth })
-const mapDispatchToProps = dispatch => bindActionCreators({ validateToken },
-    dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ validateToken }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(AuthOrApp)

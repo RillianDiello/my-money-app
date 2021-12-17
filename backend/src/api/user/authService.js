@@ -6,6 +6,7 @@ const env = require('../../.env')
 
 const emailRegex = /\S+@\S+\.\S+/
 const passwordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/
+
 const sendErrorsFromDB = (res, dbErrors) => {
     const errors = []
     _.forIn(dbErrors.errors, error => errors.push(error.message))
@@ -15,6 +16,7 @@ const sendErrorsFromDB = (res, dbErrors) => {
 const login = (req, res, next) => {
     const email = req.body.email || ''
     const password = req.body.password || ''
+
     User.findOne({ email }, (err, user) => {
         if (err) {
             return sendErrorsFromDB(res, err)
@@ -38,30 +40,24 @@ const validateToken = (req, res, next) => {
     })
 }
 
-/**
- * Method that create a new  or try login
- */
 const signup = (req, res, next) => {
     const name = req.body.name || ''
     const email = req.body.email || ''
     const password = req.body.password || ''
-    const confirmPassword = req.body.confirm_password || '' // senha do objeto no banco
+    const confirmPassword = req.body.confirm_password || ''
 
     if (!email.match(emailRegex)) {
-        return res.status(400).send({ errors: ['O e-mail informa está inválido'] })
+        return res.status(400).send({ errors: ['O e-mail informado está inválido'] })
     }
 
     if (!password.match(passwordRegex)) {
         return res.status(400).send({
             errors: [
-                "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$%) e tamanho entre 6-20."
+                "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$ %) e tamanho entre 6-20."
             ]
         })
     }
 
-    /**
-     * hash de senha e comparação entre a senha e o hash criado
-     */
     const salt = bcrypt.genSaltSync()
     const passwordHash = bcrypt.hashSync(password, salt)
     if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
