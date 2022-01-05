@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import { Field, arrayInsert, arrayRemove } from "redux-form";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Grid from "../common/layout/grid";
-import Input from "../common/form/Input";
-import If from '../common/operator/if';
-
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Field, arrayInsert, arrayRemove } from 'redux-form'
+import Grid from '../common/layout/grid'
+import Input from '../common/form/input'
+import If from '../common/operator/if'
 
 class ItemList extends Component {
 
     add(index, item = {}) {
-        if (!this.props.readOnly) {
+        if(!this.props.readOnly) {
             this.props.arrayInsert('billingCycleForm', this.props.field, index, item)
         }
     }
+
     remove(index) {
-        if (!this.props.readOnly && this.props.list.length > 1) {
+        if(!this.props.readOnly && this.props.list.length > 1) {
             this.props.arrayRemove('billingCycleForm', this.props.field, index)
         }
     }
+
     renderRows() {
         const list = this.props.list || []
         return list.map((item, index) => (
             <tr key={index}>
                 <td><Field name={`${this.props.field}[${index}].name`} component={Input}
-                    placeholder='Set Name' readOnly={this.props.readOnly}
-                ></Field></td>
+                    placeholder='Informe o nome' readOnly={this.props.readOnly} /></td>
                 <td><Field name={`${this.props.field}[${index}].value`} component={Input}
-                    placeholder='Set Value' readOnly={this.props.readOnly}></Field></td>
+                    placeholder='Informe o valor' readOnly={this.props.readOnly} /></td>
                 <If test={this.props.showStatus}>
-                <td><Field name={`${this.props.field}[${index}].status`} component={Input}
-                    placeholder='Set Status' readOnly={this.props.readOnly}></Field></td>
+                    <td><Field name={`${this.props.field}[${index}].status`} component={Input}
+                        placeholder='Informe o status' readOnly={this.props.readOnly} /></td>
                 </If>
                 <td>
                     <button type='button' className='btn btn-success'
@@ -49,6 +49,7 @@ class ItemList extends Component {
             </tr>
         ))
     }
+
     render() {
         return (
             <Grid cols={this.props.cols}>
@@ -57,12 +58,12 @@ class ItemList extends Component {
                     <table className='table'>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Value</th>
+                                <th>Nome</th>
+                                <th>Valor</th>
                                 <If test={this.props.showStatus}>
                                     <th>Status</th>
                                 </If>
-                                <th className='table-actions'>Actions</th>
+                                <th className='table-actions'>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +75,6 @@ class ItemList extends Component {
         )
     }
 }
-
 
 const mapDispatchToProps = dispatch => bindActionCreators({ arrayInsert, arrayRemove }, dispatch)
 export default connect(null, mapDispatchToProps)(ItemList)
