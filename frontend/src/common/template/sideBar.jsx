@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import Menu from './menu'
 
 export default props => (
@@ -7,5 +7,4 @@ export default props => (
             <Menu />
         </section>
     </aside>
-
 )
