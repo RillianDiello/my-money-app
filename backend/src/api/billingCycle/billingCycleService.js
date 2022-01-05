@@ -4,15 +4,7 @@ const errorHandler = require('../common/errorHandler')
 BillingCycle.methods(['get', 'post', 'put', 'delete'])
 BillingCycle.updateOptions({new: true, runValidators: true})
 BillingCycle.after('post', errorHandler).after('put', errorHandler)
-BillingCycle.route('get', (req, res, next) => {
-    BillingCycle.find({}, (error, value) => {
-        if (!error) {
-            res.json(value)
-        } else {
-            res.status(500).json({ erros: [error] })
-        }
-    })
-})
+
 BillingCycle.route('count', (req, res, next) => {
     BillingCycle.count((error, value) => {
         if(error) {
@@ -22,11 +14,7 @@ BillingCycle.route('count', (req, res, next) => {
         }
     })
 })
-// Agragation pipeline
-// command project represent the data that you want extract
-// project is used to make some operations in datas
-// group by is a function to make some agrupaments in data
-// https://docs.mongodb.com/manual/reference/operator/aggregation/project/
+
 BillingCycle.route('summary', (req, res, next) => {
     BillingCycle.aggregate({
         $project: {credit: {$sum: "$credits.value"}, debt: {$sum: "$debts.value"}}
